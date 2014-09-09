@@ -28,19 +28,16 @@ public class TodoDao {
 
     public ArrayList<Todo> getTodos(){
         ArrayList<Todo> list = new ArrayList<Todo>();
-        Cursor cursor = bdd.getReadableDatabase().rawQuery("Select * from Todo",null);
+        Cursor cursor = bdd.getReadableDatabase().rawQuery("Select * from Todo Order By dateTodo",null);
         cursor.moveToFirst();
         do
         {
-            int id = cursor.getInt(4);
+            int id = cursor.getInt(0);
             String titre = cursor.getString(1);
             String description = cursor.getString(2);
-            String jour = cursor.getString(3);
-            String mois = cursor.getString(3);
-            String annee = cursor.getString(3);
-            int heure = cursor.getInt(4);
-            int minute = cursor.getInt(5);
-            list.add(new Todo(jour,mois,annee,minute,heure,titre,description,id));
+            String date = cursor.getString(3);
+
+            list.add(new Todo(date,titre,description,id));
 
         }
         while (cursor.moveToNext());

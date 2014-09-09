@@ -7,53 +7,44 @@ package fr.kwidz.ToDo;
  * l'inclure dans la base de donnée et de le représenter pour modifications ou suppression
  **/
 public class Todo {
-    private String jour, mois, annee,titre, description;
-    private int id, minutes, heure;
+    private String date,titre, description;
+    private int id;
 
-    public Todo(String jour, String mois,String annee, int minutes, int heures,String titre, String description){
-        this.jour = jour;
-        this. mois = mois;
-        this.annee=annee;
-        this.minutes=minutes;
-        this.heure=heures;
+    public Todo(String date,String titre, String description){
+        this.date=date;
         this.titre=titre;
         this.description=description;
     }
 
-    public Todo(String jour, String mois,String annee, int minutes, int heures,String titre, String description, int id){
-        this.jour = jour;
-        this. mois = mois;
-        this.annee=annee;
-        this.minutes=minutes;
-        this.heure=heures;
+    public Todo(String date,String titre, String description, int id){
+        this.date=date;
         this.titre=titre;
         this.description=description;
         this.id=id;
     }
 
-
-    public String getJour() {
-        return jour;
+    public String getDate() {
+        return date;
     }
 
-    public void setJour(String jour) {
-        this.jour = jour;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getMois() {
-        return mois;
+    public String getTitre() {
+        return titre;
     }
 
-    public void setMois(String mois) {
-        this.mois = mois;
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
-    public String getAnnee() {
-        return annee;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAnnee(String annee) {
-        this.annee = annee;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getId() {
@@ -64,33 +55,13 @@ public class Todo {
         this.id = id;
     }
 
-    public int getMinutes() {
-        return minutes;
-    }
-
-    public void setMinutes(int minutes) {
-        this.minutes = minutes;
-    }
-
-    public int getHeure() {
-        return heure;
-    }
-
-    public void setHeure(int heure) {
-        this.heure = heure;
-    }
-
     @Override
     public String toString() {
         return "Todo{" +
-                "jour='" + jour + '\'' +
-                ", mois='" + mois + '\'' +
-                ", annee='" + annee + '\'' +
+                "date='" + date + '\'' +
                 ", titre='" + titre + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +
-                ", minutes=" + minutes +
-                ", heure=" + heure +
                 '}';
     }
 }
