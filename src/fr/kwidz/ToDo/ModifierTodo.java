@@ -13,37 +13,46 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 /**
- * Created by kwidz on 08/09/14.
+ * Created by kwidz on 09/09/14.
  */
-public class AjouterTodo extends Activity {
+public class ModifierTodo extends Activity {
+    TodoDao todoDao = new TodoDao(this);
     @Override
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ajoutertodo);
+        setContentView(R.layout.modifiertodo);
 
-        Button valider= (Button) findViewById(R.id.validerAjouter);
+        Button valider= (Button) findViewById(R.id.validerModifier);
+        Bundle extras = this.getIntent().getExtras();
+        String id = extras.getString("idTodo");
+        final EditText titre = (EditText)findViewById(R.id.titreM);
+        final EditText description = (EditText)findViewById(R.id.descriptionM);
+        final DatePicker date = (DatePicker) findViewById(R.id.dateM);
+        final TimePicker heure;
+
+
+
+        heure = (TimePicker) findViewById(R.id.timePickerM);
+        System.out.println("#######################"+id);
+        final Todo todo = todoDao.selectTodo(id);
+        titre.setText(todo.getTitre());
+        description.setText(todo.getDescription());
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText titre = (EditText)findViewById(R.id.titre);
-                EditText description = (EditText)findViewById(R.id.description);
-                DatePicker date = (DatePicker) findViewById(R.id.date);
-                TimePicker heure;
-                heure = (TimePicker) findViewById(R.id.timePicker);
-                ajouterTodo(titre.getText().toString(), description.getText().toString(),
-                        "" + date.getYear() + "-" + (date.getMonth() + 1) + "-" + date.getDayOfMonth() + "-" + heure.getCurrentHour() + "-" + heure.getCurrentMinute());
+
+                modifierTodo(titre.getText().toString(), description.getText().toString(),
+                        "" + date.getYear() + "-" + (date.getMonth() + 1) + "-" + date.getDayOfMonth() + "-" + heure.getCurrentHour() + "-" + heure.getCurrentMinute(),todo.getId());
             }
         });
     }
+    private void modifierTodo(String titre, String desc, String date, int id) {
 
-    private void ajouterTodo(String titre, String desc, String date) {
-        TodoDao todoDao = new TodoDao(this);
-        Todo todo = new Todo(date, titre,desc);
-        todoDao.insertInto(todo);
+        Todo todo = new Todo(date, titre, desc, id);
+        todoDao.update(todo);
         AlertDialog alertDialog = new AlertDialog.Builder(
                 this).create();
-        alertDialog.setTitle("Le todo à été ajouté !");
+        alertDialog.setTitle("Le todo à été Modifié !");
         //alertDialog.setMessage("ho shit !");
         alertDialog.setMessage(titre+"\n"+desc+"\n"+date);
         alertDialog.setIcon(android.R.drawable.btn_star);

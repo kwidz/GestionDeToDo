@@ -14,7 +14,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Ajouter un todo\n\n"
+                android:text="Modifier le todo\n\n"
                 android:id="@+id/textView" android:layout_gravity="center_horizontal"/>
         <TextView
                 android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/titre" android:layout_gravity="center_horizontal"/>
+                android:id="@+id/titreM" android:layout_gravity="center_horizontal"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/description" android:layout_gravity="center_horizontal"/>
+                android:id="@+id/descriptionM" android:layout_gravity="center_horizontal"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         <DatePicker
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/date" android:layout_gravity="center_horizontal"/>
+                android:id="@+id/dateM" android:layout_gravity="center_horizontal"/>
 
         <TextView
                 android:layout_width="wrap_content"
@@ -53,12 +53,12 @@
         <TimePicker
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/timePicker" android:layout_gravity="center_horizontal"/>
+                android:id="@+id/timePickerM" android:layout_gravity="center_horizontal"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Enregistrer"
-                android:id="@+id/validerAjouter" android:layout_gravity="center_horizontal"/>
+                android:id="@+id/validerModifier" android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>
 

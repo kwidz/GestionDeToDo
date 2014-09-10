@@ -8,17 +8,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
+import android.widget.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-public class Home extends Activity implements AdapterView.OnItemLongClickListener {
+public class Home extends Activity{
 
     private TodoDao todoDao;
     private Button button;
@@ -33,7 +27,6 @@ public class Home extends Activity implements AdapterView.OnItemLongClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         todoDao = new TodoDao(this);
-        afficherTodos();
         remplirList();
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -47,26 +40,54 @@ public class Home extends Activity implements AdapterView.OnItemLongClickListene
 
     }
 
-    public void afficherTodos(){
-        todoDao.getTodos();
-
-    }
-
     public void remplirList(){
-        ArrayList<Todo> l = todoDao.getTodos();
-        ArrayList<String> list = new ArrayList<String>();
-        Iterator itr = l.listIterator();
 
-        while (itr.hasNext())
-            list.add(itr.next().toString());
-        System.out.println(list);
 
-        final StableArrayAdapter adapter = new StableArrayAdapter(this,
-                android.R.layout.simple_list_item_1, list);
-        System.out.println(adapter);
-        ListView listView1=(ListView) findViewById(R.id.listeTodos);
+        SimpleAdapter adapter = new SimpleAdapter(
+                this,
+                todoDao.listerTodos(),
+                android.R.layout.two_line_list_item,
+                new String[]{"titre","description","date"},
+                new int[]{android.R.id.text1,android.R.id.text2,android.R.id.text2}
+        );
+
+        final ListView listView1=(ListView) findViewById(R.id.listeTodos);
         listView1.setAdapter(adapter);
-        listView1.setOnItemLongClickListener(this);
+        listView1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(Home.this);
+                dialog.setTitle("Que voulez vous faire ?");
+                final HashMap<String,String> todo = (HashMap<String, String>) listView1.getItemAtPosition((int)id);
+                dialog.setPositiveButton("Annuler", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ;
+                    }
+                });
+                dialog.setNegativeButton("Supprimer", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        todoDao.delete(todo.get("id"));
+                        Intent refresh = new Intent(Home.this, Home.class);
+                        startActivity(refresh);
+                    }
+                });
+                dialog.show();
+                return false;
+            }
+        });
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                HashMap<String,String> todo = (HashMap<String, String>) listView1.getItemAtPosition((int)id);
+                Intent goToModifierTodo = new Intent(Home.this, ModifierTodo.class);
+                goToModifierTodo.putExtra("idTodo", todo.get("id"));
+                startActivity(goToModifierTodo);
+            }
+        });
+
     }
 
     public void ajouterTodo(View v){
@@ -74,45 +95,8 @@ public class Home extends Activity implements AdapterView.OnItemLongClickListene
         startActivity(nav);
     }
 
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle("Que voulez vous faire ?");
-        dialog.setPositiveButton("Modifier",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                ;
-            }
-        });
-        dialog.setNegativeButton("Supprimer", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                ;
-            }
-        });
-        dialog.setNeutralButton("Annuler", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                ;
-            }
-        });
-        dialog.show();
-        return false;
-    }
 
 
-
-    private class StableArrayAdapter extends ArrayAdapter {
-
-        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
-
-        public StableArrayAdapter(Context context, int textViewResourceId, List<String> objects) {
-            super(context, textViewResourceId, objects);
-            for (int i = 0; i < objects.size(); ++i) {
-                mIdMap.put(objects.get(i), i);
-            }
-        }
-    }
 }
 
 
