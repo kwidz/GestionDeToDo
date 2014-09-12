@@ -32,7 +32,7 @@ public class AjouterTodo extends Activity {
                 TimePicker heure;
                 heure = (TimePicker) findViewById(R.id.timePicker);
                 ajouterTodo(titre.getText().toString(), description.getText().toString(),
-                        "" + date.getYear() + "-" + (date.getMonth() + 1) + "-" + date.getDayOfMonth() + "-" + heure.getCurrentHour() + "-" + heure.getCurrentMinute());
+                        "" + date.getYear() + "-" + (date.getMonth() + 1) + "-" + date.getDayOfMonth() + " " + heure.getCurrentHour() + ":" + heure.getCurrentMinute()+":00");
             }
         });
     }
@@ -57,6 +57,7 @@ public class AjouterTodo extends Activity {
     }
     private void retour(){
         Intent nav = new Intent(this, Home.class);
+        this.finish();
         startActivity(nav);
     }
 }

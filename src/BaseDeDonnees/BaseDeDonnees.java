@@ -23,9 +23,9 @@ public class BaseDeDonnees extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLE = "create table Todo(id_Todo INTEGER PRIMARY KEY, title TEXT, description TEXT, dateTodo smalldatetime)";
+        String CREATE_TABLE = "create table Todo(id_Todo INTEGER PRIMARY KEY, title TEXT, description TEXT, dateTodo datetime)";
         db.execSQL(CREATE_TABLE);
-        String INSERT_TABLE = "Insert into Todo(title,description,dateTodo) VALUES('réveil','pour me réveiller le matin','2014-05-06-07-00-00')";
+        String INSERT_TABLE = "Insert into Todo(title,description,dateTodo) VALUES('réveil','pour me réveiller le matin','2014-05-06 07:00:00')";
         db.execSQL(INSERT_TABLE);
     }
 

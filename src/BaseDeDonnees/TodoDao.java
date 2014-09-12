@@ -24,24 +24,38 @@ public class TodoDao {
 
     public TodoDao(Context contexte){
 
-        bdd = new BaseDeDonnees(contexte);
+        bdd = new BaseDeDonnees(contexte) ;
     }
 
     public ArrayList listerTodos(){
         ArrayList<HashMap<String,String>> listeTodos = new ArrayList<HashMap<String, String>>();
         HashMap<String,String> hash;
-        Cursor cursor = bdd.getReadableDatabase().rawQuery("Select * from Todo Order By dateTodo",null);
+        Cursor cursor = bdd.getReadableDatabase().rawQuery("Select * from Todo where dateTodo>=(select (DATETIME('now'))) Order By dateTodo",null);
         cursor.moveToFirst();
         do {
             hash = new HashMap<String, String>();
             hash.put("titre",cursor.getString(1));
             hash.put("description",cursor.getString(2));
+
             hash.put("date",cursor.getString(3));
-            hash.put("id",cursor.getString(0));listeTodos.add(hash);
+            hash.put("id",cursor.getString(0));
+            listeTodos.add(hash);
 
         }while(cursor.moveToNext());
         return listeTodos   ;
 
+    }
+
+    public boolean todoOuPas(){
+        Cursor cursor = bdd.getReadableDatabase().rawQuery( "select (DATETIME('now'))",null);
+        cursor.moveToFirst();
+        System.out.println("##################################### "+cursor.getString(0));
+        cursor = bdd.getReadableDatabase().rawQuery("Select count(*),dateTodo from Todo where (select (DATETIME('now'))) < dateTodo",null);
+        cursor.moveToFirst();
+        System.out.println(cursor.getString(0)+"##################################### "+cursor.getString(1));
+        if (cursor.getInt(0)>0)
+            return true;
+        return false;
     }
 
     public Todo selectTodo(String id){

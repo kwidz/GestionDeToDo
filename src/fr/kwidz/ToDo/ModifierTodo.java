@@ -42,7 +42,7 @@ public class ModifierTodo extends Activity {
             public void onClick(View v) {
 
                 modifierTodo(titre.getText().toString(), description.getText().toString(),
-                        "" + date.getYear() + "-" + (date.getMonth() + 1) + "-" + date.getDayOfMonth() + "-" + heure.getCurrentHour() + "-" + heure.getCurrentMinute(),todo.getId());
+                        "" + date.getYear() + "-" + (date.getMonth() + 1) + "-" + date.getDayOfMonth() + " " + heure.getCurrentHour() + ":" + heure.getCurrentMinute()+":00",todo.getId());
             }
         });
     }
@@ -66,6 +66,7 @@ public class ModifierTodo extends Activity {
     }
     private void retour(){
         Intent nav = new Intent(this, Home.class);
+        this.finish();
         startActivity(nav);
     }
 }

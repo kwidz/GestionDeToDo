@@ -8,12 +8,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Yours planified tasks"
+            android:text="Vos tâches planifiées"
             android:id="@+id/textView" android:layout_gravity="center_horizontal"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add a new Todo"
+            android:text="Ajouter une tâche"
             android:id="@+id/button" android:layout_gravity="center_horizontal"/>
     <ListView
             android:layout_width="match_parent"
