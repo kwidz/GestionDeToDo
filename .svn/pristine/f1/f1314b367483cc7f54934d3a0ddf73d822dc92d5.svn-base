@@ -1,0 +1,7 @@
+0000000000000000000000000000000000000000 7290f823544cb1cf5819ecd7db7d1c317d6a1a8b geoffrey glangine <geoffrey.glangine@gmail.com> 1410117566 -0400	commit (initial): first commit
+7290f823544cb1cf5819ecd7db7d1c317d6a1a8b 4017404b2f445ffd419b00e932d8d537cd6855ce geoffrey glangine <geoffrey.glangine@gmail.com> 1410117753 -0400	commit: début du projet
+4017404b2f445ffd419b00e932d8d537cd6855ce 2754707f11fc15ec25a1d3aca8cbd9d85f3da918 geoffrey glangine <geoffrey.glangine@gmail.com> 1410123217 -0400	commit: creation de la liste des todos depuis la bdd
+2754707f11fc15ec25a1d3aca8cbd9d85f3da918 5f4e4dc7d803ba3441ce954e288882fb54be754c geoffrey glangine <geoffrey.glangine@gmail.com> 1410239607 -0400	commit: suppression, ajout, et jolies dates
+5f4e4dc7d803ba3441ce954e288882fb54be754c 4dc0767abd17edc4826ccaf3a7b440bea446dd75 geoffrey glangine <geoffrey.glangine@gmail.com> 1410239629 -0400	pull: Merge made by the 'recursive' strategy.
+4dc0767abd17edc4826ccaf3a7b440bea446dd75 ae74924b79d3267fa401caaace8f1c6873820792 geoffrey glangine <geoffrey.glangine@gmail.com> 1410315413 -0400	commit: fin de la modification des todos
+ae74924b79d3267fa401caaace8f1c6873820792 3e2d66c97ea1fa6980fb49d94e7053d1490b7d64 geoffrey glangine <geoffrey.glangine@gmail.com> 1410546624 -0400	commit: petites modifs ex date, bug long click, fermer l activity...etc
