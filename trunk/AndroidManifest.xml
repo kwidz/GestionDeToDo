@@ -14,5 +14,6 @@
         </activity>
         <activity android:name=".AjouterTodo"/>
         <activity android:name=".ModifierTodo"/>
+        <activity android:name=".AlarmerUtilisateur"/>
     </application>
 </manifest>

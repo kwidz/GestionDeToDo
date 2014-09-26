@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 /**
+ * Activité de modification du todo
  * Created by kwidz on 09/09/14.
  */
 public class ModifierTodo extends Activity {
@@ -37,6 +38,9 @@ public class ModifierTodo extends Activity {
         final Todo todo = todoDao.SelectionerLesTodos(id_Todo);
         titre.setText(todo.getTitre());
         description.setText(todo.getDescription());
+
+        //ecouteur d'événement sur le bouton ajouter
+
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,9 +50,19 @@ public class ModifierTodo extends Activity {
             }
         });
     }
+
+    /**
+     * Fonction de modification du todo
+     *
+     * @param titre titre du todo
+     * @param desc description du todo
+     * @param date date du todo
+     * @param id identifiant du todo
+     */
+
     private void modifierTodo(String titre, String desc, String date, int id) {
 
-        Todo todo = new Todo(date, titre, desc, id);
+        Todo todo = new Todo(date, titre, desc, id, "hahah");
         todoDao.update(todo);
         AlertDialog boiteDeDialogue = new AlertDialog.Builder(
                 this).create();
@@ -64,6 +78,11 @@ public class ModifierTodo extends Activity {
         });
         boiteDeDialogue.show();
     }
+
+    /**
+     *Fonction pour retourner a l'activité principale
+     */
+
     private void retour(){
         Intent naviguerAccueil = new Intent(this, EcranAccueil.class);
         this.finish();

@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
+ * Classe de création de la Base de données
  * Created by kwidz on 07/09/14.
  */
 public class BaseDeDonnees extends SQLiteOpenHelper {
@@ -23,10 +24,8 @@ public class BaseDeDonnees extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLE = "create table Todo(id_Todo INTEGER PRIMARY KEY, title TEXT, description TEXT, dateTodo datetime)";
+        String CREATE_TABLE = "create table Todo(id_Todo INTEGER PRIMARY KEY, title TEXT, description TEXT, dateTodo datetime, listeEmails TEXT)";
         db.execSQL(CREATE_TABLE);
-        String INSERT_TABLE = "Insert into Todo(title,description,dateTodo) VALUES('réveil','pour me réveiller le matin','2014-05-06 07:00:00')";
-        db.execSQL(INSERT_TABLE);
     }
 
     @Override
